@@ -1,1 +1,1 @@
-BOT_NAME = "Tom"
+BOT_NAME = "Tom AI"
