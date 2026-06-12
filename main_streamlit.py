@@ -54,6 +54,12 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["are you sure", "is it true", "are you real", "are you a real ai", "are you a real person", "are you a real human", "are you a real bot", "are you a real machine", "are you a real computer"]:
         return f"{bot_name}: {random.choice(confirm)}"
 
+    elif "what can you do" in user_input or "help" in user_input:
+            bot_output = f"""{bot_name}: I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
+
+            Try: hi, time, add 5 3, portfolio, hire Amos"""
+            st.markdown(f'<p class="bot-text">{bot_output}</p>', unsafe_allow_html=True)
+
     elif user_input in ["the feeling is mutual","same here","you too","mutual feelings", "i like you", "i love you", "i care about you", "i appreciate you"]:
         return f"{bot_name}: aww thanks {username}!"
 
