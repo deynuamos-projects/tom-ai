@@ -83,14 +83,13 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
         return f"{bot_name}: {random.choice(ah_replies)}"
 
-
-    elif any(word in user_input for word in ["hi", "hello", "sap", "yo", "whatsup"]):
+ elif any(word in user_input for word in ["hi", "hello", "sap", "yo", "whatsup"]):
     for word in ["hi", "hello", "sap", "yo", "whatsup"]:
         if word in user_input:
-            bot_output = f"{bot_name}: {random.choice(RESPONSES[word])}"
-            break
-    st.markdown(f'<p class="bot-text">{bot_output}</p>', unsafe_allow_html=True)
+            return f"{bot_name}: {random.choice(RESPONSES[word])}"
+    return f"{bot_name}: {random.choice(RESPONSES['default'])}"   
 
+    
     elif user_input in ["you are dumb", "you are useless", "you are a waste of time", "you are a piece of garbage", "you are an idiot", "you don't know anything"]:
         return f"{bot_name}: {random.choice(insults_mild)}"
 
