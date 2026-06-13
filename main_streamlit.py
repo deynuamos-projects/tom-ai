@@ -52,7 +52,7 @@ def handle_responses(user_input: str) -> str:
     ai_identity = ["I'm an INTELLIGENT AI of course😊!", "Why do you ask", "Just code and vibes"]
     confirm = ["sure", "👌", "👍", "Yes"]
     thanks = ["Thank you", "Thanks", "I'm blushing😁","👍","🔥"]
-    ok_replies = ["ok", "Cool cool", "Gotcha 👍", "Alright!", "Nice","active","active active"]
+    ok_replies = ["ok", "Cool", "Gotcha 👍", "Alright!", "Nice","active","active active","yeah","yh","yep"]
     ah_replies = ["see you oo 😏", "What's up?", "You good?","you ok?"]
     insults_mild = ["you don't know anything", "you are a jerk", "shameless user", "shame on you", "you be clown"]
     insults_hard = ["Gbemi😂!", "you dey craze", "you be Mumu", "onyesorrmi😒", "don't try me", "johnky user","kwaasia!","gbevou!","aboa!","wo hu s3 adwene😅","eta mele ashiwou","susu mele ashiwou","wo te mu sum s3 kubea"]
