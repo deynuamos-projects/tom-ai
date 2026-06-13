@@ -87,7 +87,7 @@ def handle_responses(user_input: str) -> str:
     for word in ["hi", "hello", "sap", "yo", "whatsup"]:
         if word in user_input:
             return f"{bot_name}: {random.choice(RESPONSES[word])}"
-    return f"{bot_name}: {random.choice(dont_know)}"
+            return f"{bot_name}: {random.choice(dont_know)}"
 
     
     elif user_input in ["you are dumb", "you are useless", "you are a waste of time", "you are a piece of garbage", "you are an idiot", "you don't know anything"]:
