@@ -77,7 +77,7 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["nice work", "great", "good", "nice", "well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
         return f"{bot_name}: {random.choice(thanks)}"
 
-    elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep"]:
+    elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep","yeah"]:
         return f"{bot_name}: {random.choice(ok_replies)}"
 
     elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
