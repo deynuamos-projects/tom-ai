@@ -52,7 +52,7 @@ def handle_responses(user_input: str) -> str:
     ai_identity = ["I'm an INTELLIGENT AI of course😊!", "Why do you ask", "Just code and vibes"]
     confirm = ["sure", "👌", "👍", "Yes"]
     thanks = ["Thank you", "Thanks", "I'm blushing😁","👍","🔥"]
-    ok_replies = ["ok", "Cool", "Gotcha 👍", "Alright!", "Nice","active","active active","yeah","yh","yep"]
+    ok_replies = ["ok", "Cool", "Gotcha 👍", "Alright!", "Nice","active","active active","yeah"]
     ah_replies = ["see you oo 😏", "What's up?", "You good?","you ok?"]
     insults_mild = ["you don't know anything", "you are a jerk", "shameless user", "shame on you", "you be clown"]
     insults_hard = ["Gbemi😂!", "you dey craze", "you be Mumu", "onyesorrmi😒", "don't try me", "johnky user","kwaasia!","gbevou!","aboa!","wo hu s3 adwene😅","eta mele ashiwou","susu mele ashiwou","wo te mu sum s3 kubea"]
@@ -77,7 +77,7 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["nice work", "great", "good", "nice", "well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
         return f"{bot_name}: {random.choice(thanks)}"
 
-    elif user_input in ["ok", "okay", "k", "kk", "alright"]:
+    elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep"]:
         return f"{bot_name}: {random.choice(ok_replies)}"
 
     elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
