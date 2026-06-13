@@ -74,7 +74,7 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["the feeling is mutual","same here","you too","mutual feelings", "i like you", "i love you", "i care about you", "i appreciate you"]:
         return f"{bot_name}: aww thanks {username}!"
 
-    elif user_input in ["nice work", "great", "good", "nice", "well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
+    elif user_input in ["nice work", "great", "good","please thanks","nice","Ok thanks","well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
         return f"{bot_name}: {random.choice(thanks)}"
 
     elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep","yeah"]:
@@ -116,7 +116,7 @@ def handle_responses(user_input: str) -> str:
         I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
         He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = Amos Deynu!"""
 
-    elif "hire" in user_input or "contact" in user_input or "book" in user_input or "work with" in user_input or "reach" in user_input:
+    elif "hire" in user_input or "contact" in user_input or "book" in user_input or "work with" in user_input or "hire him" in user_input:
         return f"""{bot_name}: Want to hire Amos Deynu? Smart move 👌
         He's a brilliant developer + born ideator from Accra, Ghana 🇬🇭
         Skills: Python, AI chatbots, web apps, automation, solving real problems
