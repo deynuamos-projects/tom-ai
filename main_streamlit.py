@@ -83,7 +83,7 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
         return f"{bot_name}: {random.choice(ah_replies)}"
 
-    elif any(word in user_input for word in ["hi", "hello", "sap", "yo", "whatsup"]):
+elif any(word in user_input for word in ["hi", "hello", "sap", "yo", "whatsup"]):
     for word in ["hi", "hello", "sap", "yo", "whatsup"]:
         if word in user_input:
             return f"{bot_name}: {random.choice(RESPONSES[word])}"
