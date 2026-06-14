@@ -6,7 +6,6 @@ from time import strftime
 import os
 import time
 import responses as r
-
 import random
 
 RESPONSES = {
@@ -165,8 +164,8 @@ if not st.session_state.setup_done:
         else:
             st.session_state.username = username
             st.session_state.setup_done = True
-            st.success(f"{bot_name}: Nice to meet you, {username}!")
-            time.sleep(0.5)
+            welcome_msg = (f"{bot_name}: Nice to meet you, {username}! what's on your mind?")
+            st.session_state.messages.append({"role": "assistant","content": welcome_msg})
             st.rerun()
 else:
     # Main chat loop
