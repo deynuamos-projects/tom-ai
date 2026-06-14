@@ -176,17 +176,17 @@ else:
         username = st.session_state.username
 
         # === YOUR ORIGINAL LOGIC WRAPPED IN TYPING ===
-with st.chat_message("assistant"):
-    message_placeholder = st.empty()
+        with st.chat_message("assistant"):
+        message_placeholder = st.empty()
 
-    # Typing dots
-    for i in range(3):
+        # Typing dots
+        for i in range(3):
         message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
         time.sleep(random.uniform(0.3, 0.6))
 
-    # Type out WITHOUT tick
-    full_response = ""
-    for char in reply:
+        # Type out WITHOUT tick
+        full_response = ""
+        for char in reply:
         full_response += char
         message_placeholder.markdown(f"**Tom:** {full_response}", unsafe_allow_html=True)
         if char in " .,!?":
@@ -194,11 +194,11 @@ with st.chat_message("assistant"):
         else:
             time.sleep(random.uniform(0.02, 0.08))
 
-    # Final message WITH blue tick ONCE
-    message_placeholder.markdown(
+        # Final message WITH blue tick ONCE
+        message_placeholder.markdown(
         f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
         unsafe_allow_html=True
-    )
+        )
             try:
                 now = datetime.now()
                 if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
