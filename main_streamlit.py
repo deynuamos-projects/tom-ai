@@ -65,9 +65,9 @@ Want his contact? Just say 'hire him'"""
     yes_keywords = ["yes","yeah","yep","sure","go ahead","give it","that's what i want","spill it already","send it","ok","want it please","drop it"]
 
     # 3. Check awaiting_contact_confirm BEFORE hire_keywords
-if user_input == "something":   # <- colon added
+    if user_input == "something":   # <- colon added
     do_something()
-elif user_input.lower() == "hire him":
+    elif user_input.lower() == "hire him":
         return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
     
     if st.session_state.get("awaiting_contact_confirm"):
