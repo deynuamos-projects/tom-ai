@@ -10,10 +10,11 @@ import responses as r
 import random
 
 RESPONSES = {
-    "hi": ["Hey there! I'm Tom AI 👋",         "Hi! Tom AI here. What's up?"],
+    "hi": ["Hey there! I'm Tom AI 👋","Hi! Tom AI here. What's up?"],
     "hello": ["Hello! Tom AI at your service", "Hey!"],
     "sap": ["Saaaap boss! 😎 You good?", "Wassup my guy!"],
     "yo": ["Yo yo! Tom AI reporting for duty", "What's good?"],
+    "creator": ["Amos Deynu built me! He's a dev from Ghana. Check his portfolio with 'portfolio'"],
     "whatsup": ["Not much, just vibing. You?", "Chilling bro. What’s on your mind?"]
 }
 
@@ -69,7 +70,7 @@ def handle_responses(user_input: str) -> str:
             bot_output = f"""{bot_name}: I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
 
             Try: hi, time, add 5 3, portfolio, hire Amos"""
-            st.markdown(f'<p class="bot-text">{bot_output}</p>', unsafe_allow_html=True)
+        return bot_output
 
     elif user_input in ["the feeling is mutual","same here","you too","mutual feelings", "i like you", "i love you", "i care about you", "i appreciate you"]:
         return f"{bot_name}: aww thanks {username}!"
@@ -77,7 +78,7 @@ def handle_responses(user_input: str) -> str:
     elif user_input in ["nice work", "great", "good","please thanks","nice","Ok thanks","well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
         return f"{bot_name}: {random.choice(thanks)}"
 
-    elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep","yeah"]:
+    elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep","yeah","ok please"]:
         return f"{bot_name}: {random.choice(ok_replies)}"
 
     elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
