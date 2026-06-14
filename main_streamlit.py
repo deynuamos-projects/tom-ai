@@ -199,7 +199,7 @@ else:
             f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
             unsafe_allow_html=True
         )
-            try:
+    try:
                 now = datetime.now()
                 if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
                     parts = []
