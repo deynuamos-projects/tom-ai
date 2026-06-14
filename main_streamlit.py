@@ -297,5 +297,6 @@ else:
             messages_placeholder.markdown(
                 f"**{bot_name}:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓✓</span>",
                 unsafe_allow_html=True
+               )
                 
         st.session_state.messages.append({"role": "assistant", "content": reply})
