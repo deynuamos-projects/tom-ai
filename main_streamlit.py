@@ -68,7 +68,7 @@ Want his contact? Just say 'hire him'"""
     if st.session_state.get("awaiting_contact_confirm"):
         if any(word in user_input for word in yes_keywords):
             st.session_state.awaiting_contact_confirm = False
-            return f"**Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
+            return f"**Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: [+233 50 763 0485](tel:+233507630485)\n💬 [Click to WhatsApp](https://wa.me/233507630485)\nTell him TOM AI sent you 💪"
         else:
             st.session_state.awaiting_contact_confirm = False
             return f"No problem {username} 😊 Ask me anything else!"
