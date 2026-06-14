@@ -286,12 +286,16 @@ else:
             for char in reply:
                 full_response += char
                 message_placeholder.markdown(
-                    f"{full_response} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
+                    f"**{bot_name}:** {full_response}",
                     unsafe_allow_html=True
                 )
                 if char in ".,!?":
                     time.sleep(random.uniform(0.01, 0.03))
                 else:
                     time.sleep(random.uniform(0.02, 0.08))
-
+         # WHATSAPP TUCK ONLY AT THE END
+            messages_placeholder.markdown(
+                f"**{bot_name}:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓✓</span>",
+                unsafe_allow_html=True
+                
         st.session_state.messages.append({"role": "assistant", "content": reply})
