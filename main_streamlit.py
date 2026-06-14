@@ -55,7 +55,7 @@ def handle_responses(user_input: str) -> str:
 
     # 1. INFORMATION ABOUT AMOS FIRST - moved to TOP
     if any(w in user_input for w in ["who created you","who built you","who made you","who is your creator","tell me about amos","who is deynu","who is amos","who is amos deynu"]):
-        return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
+        return f"""I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
 I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
 He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = ***Amos Deynu!***
 Want his contact? Just say 'hire him'"""
@@ -65,18 +65,13 @@ Want his contact? Just say 'hire him'"""
     yes_keywords = ["yes","yeah","yep","sure","go ahead","give it","that's what i want","spill it already","send it","ok","want it please","drop it"]
 
     # 3. Check awaiting_contact_confirm BEFORE hire_keywords
-    if user_input == "something":   # <- colon added
-        do_something()
-    elif user_input.lower() == "hire him":
-        return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
-    
     if st.session_state.get("awaiting_contact_confirm"):
         if any(word in user_input for word in yes_keywords):
             st.session_state.awaiting_contact_confirm = False
-            return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
+            return f"**Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
         else:
             st.session_state.awaiting_contact_confirm = False
-            return f"{bot_name}: No problem {username} 😊 Ask me anything else!"
+            return f"No problem {username} 😊 Ask me anything else!"
 
     if any(word in user_input for word in hire_keywords):
         st.session_state.awaiting_contact_confirm = True
@@ -87,57 +82,57 @@ Want his contact? Just say 'hire him'"""
     confirm = ["sure", "👌", "👍", "Yes"]
     thanks = ["Thank you", "Thanks", "I'm blushing😁","👍","🔥"]
     ok_replies = ["ok", "Cool", "Gotcha 👍", "Alright!", "Nice","active","active active","yeah"]
-    ah_replies = ["see you oo 😏", "What's up?", "You good?","you ok?"]
+    ah_replies = ["see you oo 😏", "What's up?", "You good?","you ok?", "what"]
     insults_mild = ["you don't know anything", "you are a jerk", "shameless user", "shame on you", "you be clown"]
     insults_hard = ["Gbemi😂!", "you dey craze", "you be Mumu", "onyesorrmi😒", "don't try me", "johnky user","kwaasia!","gbevou!","aboa!","wo hu s3 adwene😅","eta mele ashiwou","susu mele ashiwou","wo te mu sum s3 kubea"]
     insult_reply = ["no, I'm just responding to your insults", "I'm just reflecting your words back to you"]
     dont_know = ["I don't have a response for that yet, but I'm learning every day!😎", "ooops, I don't understand 😅", "Huh? 😕 try something else"]
 
     if user_input in ["what kind of ai are you", "who are you", "are you intelligent"]:
-        return f"{bot_name}: {random.choice(ai_identity)}"
+        return f"{random.choice(ai_identity)}"
     elif user_input in ["are you sure", "is it true", "are you real", "are you a real ai", "are you a real person", "are you a real human", "are you a real bot", "are you a real machine", "are you a real computer"]:
-        return f"{bot_name}: {random.choice(confirm)}"
+        return f"{random.choice(confirm)}"
     elif user_input in ["nothing","nothing really"]:
-        return f"{bot_name}: {random.choice(ok_replies)}"
+        return f"{random.choice(ok_replies)}"
     elif "what can you do" in user_input or "help" in user_input:
-        return f"""{bot_name}: I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
+        return f"""I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
 Try: hi, time, add 5 3, portfolio, hire Amos"""
     elif user_input in ["the feeling is mutual","same here","you too","mutual feelings", "i like you", "i love you", "i care about you", "i appreciate you"]:
-        return f"{bot_name}: aww thanks {username}!"
+        return f"aww thanks {username}!"
     elif user_input in ["nice work", "great", "good","please thanks","nice","Ok thanks","well done", "wel'done", "👍", "👋", "bravo", "wow", "thanks", "great work", "nice work", "keep it up", "keep on", "keep going","nice work","big work","congratulations"]:
-        return f"{bot_name}: {random.choice(thanks)}"
+        return f"{random.choice(thanks)}"
     elif user_input in ["ok", "okay", "kk", "alright","cool","good","great","i dey","yh","yep","yeah","ok please"]:
-        return f"{bot_name}: {random.choice(ok_replies)}"
-    elif user_input in ["ah", "oh", "erh", "hmm", "erhn"]:
-        return f"{bot_name}: {random.choice(ah_replies)}"
+        return f"{random.choice(ok_replies)}"
+    elif user_input in ["ah", "oh", "erh", "hmm", "erhn", "what"]:
+        return f"{random.choice(ah_replies)}"
     elif any(word in user_input for word in ["hi", "hello", "sap", "yo", "whatsup"]):
         for word in ["hi", "hello", "sap", "yo", "whatsup"]:
             if word in user_input:
-                return f"{bot_name}: {random.choice(RESPONSES[word])}"
-        return f"{bot_name}: {random.choice(dont_know)}"
+                return f"{random.choice(RESPONSES[word])}"
+        return f"{random.choice(dont_know)}"
     elif user_input in ["you are dumb", "you are useless", "you are a waste of time", "you are a piece of garbage", "you are an idiot", "you don't know anything"]:
-        return f"{bot_name}: {random.choice(insults_mild)}"
+        return f"{random.choice(insults_mild)}"
     elif user_input in ["are you insulting me", "are you calling me names", "are you calling me an idiot"]:
-        return f"{bot_name}: {random.choice(insult_reply)}"
+        return f"{random.choice(insult_reply)}"
     elif user_input in ["you are not responding to my insults", "why aren't you responding to my insults", "why are you ignoring my insults"]:
-        return f"{bot_name}: {random.choice(insult_reply)}"
+        return f"{random.choice(insult_reply)}"
     elif user_input in ["wow", "oh wow", "whoa", "omg","impressive"]:
-        return f"{bot_name}: glad you like it😎"
+        return f"glad you like it😎"
     elif user_input == "thank you":
-        return f"{bot_name}: You are welcome!, {username}"
+        return f"You are welcome!, {username}"
     elif user_input in ["idiot", "stupid ai", "you are foolish", "foolish ai", "you are mad"]:
-        return f"{bot_name}: {random.choice(insults_hard)}"
+        return f"{random.choice(insults_hard)}"
     elif "built" in user_input or "made" in user_input or "created" in user_input or "owner" in user_input or "creator" in user_input:
-        return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
+        return f"""I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
 I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
 He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = Amos Deynu!"""
     elif "portfolio" in user_input or "projects" in user_input:
-        return f"""{bot_name}: Here’s Amos Deynu’s portfolio so far 💻
+        return f"""Here’s Amos Deynu’s portfolio so far 💻
 1. Tom AI - The chatbot you’re talking to right now. Built with Python while self-learning the language.
 2. More projects loading... Amos is a born ideator with more builds coming 🚀
 Want to be his next project? Type 'hire Amos' and let’s talk."""
     else:
-        return f"{bot_name}: {random.choice(dont_know)}"
+        return f"{random.choice(dont_know)}"
 
 # Streamlit UI
 col1, col2 = st.columns([4,1])
