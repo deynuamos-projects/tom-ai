@@ -66,7 +66,7 @@ Want his contact? Just say 'hire him'"""
 
     # 3. Check awaiting_contact_confirm BEFORE hire_keywords
     if user_input == "something":   # <- colon added
-    do_something()
+        do_something()
     elif user_input.lower() == "hire him":
         return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
     
