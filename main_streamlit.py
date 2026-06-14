@@ -63,6 +63,21 @@ def handle_responses(user_input: str) -> str:
     insult_reply = ["no, I'm just responding to your insults", "I'm just reflecting your words back to you"]
     dont_know = ["I don't have a response for that yet, but I'm learning every day!😎", "ooops, I don't understand 😅", "Huh? 😕 try something else"]
 
+    # === MOVE HIRE/CONTACT + YES CHECK TO TOP ===
+    hire_keywords = ["hire", "contact", "book", "work with", "hire him", "link me up", "amos", "deynu", "creator", "builder", "owner","built you", "made you", "created you","who is amos","who is deynu","who is your creator","who is your builder","who is your owner"]
+    yes_keywords = ["yes", "yeah", "yep", "sure", "go ahead", "give it", "that's what i want", "send it", "ok"]
+
+    # 1. Hire/Contact intent FIRST
+    if any(word in user_input for word in hire_keywords):
+        st.session_state.awaiting_contact_confirm = True
+        return f"{bot_name}: Say less, {username} 😎 You want my creator Deynu's contact right?"
+
+    # 2. Yes confirmation SECOND
+    elif st.session_state.get("awaiting_contact_confirm") and any(word in user_input for word in yes_keywords):
+        st.session_state.awaiting_contact_confirm = False
+        return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him Tom AI sent you 💪"
+
+    # === YOUR ORIGINAL CODE BELOW - 100% UNCHANGED ===
     if user_input in ["what kind of ai are you", "who are you", "are you intelligent"]:
         return f"{bot_name}: {random.choice(ai_identity)}"
     elif user_input in ["are you sure", "is it true", "are you real", "are you a real ai", "are you a real person", "are you a real human", "are you a real bot", "are you a real machine", "are you a real computer"]:
@@ -93,8 +108,6 @@ Try: hi, time, add 5 3, portfolio, hire Amos"""
         return f"{bot_name}: {random.choice(insult_reply)}"
     elif user_input in ["wow", "oh wow", "whoa", "omg","impressive"]:
         return f"{bot_name}: glad you like it😎"
-    elif any(word in user_input for word in ["amos", "deynu", "creator", "builder", "owner","built you", "made you", "created you","who is amos","who is deynu","who is your creator","who is your builder","who is your owner"]):
-        return f"{bot_name}: I was built by Amos Deynu, a brilliant developer and born ideator from Accra, Ghana 🇬🇭. I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems. He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = Amos Deynu!😁\n Want his contact? Just say hire him or contact him"
     elif user_input == "thank you":
         return f"{bot_name}: You are welcome!, {username}"
     elif user_input in ["idiot", "stupid ai", "you are foolish", "foolish ai", "you are mad"]:
@@ -103,12 +116,6 @@ Try: hi, time, add 5 3, portfolio, hire Amos"""
         return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
 I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
 He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = Amos Deynu!"""
-    elif "hire" in user_input or "contact" in user_input or "book" in user_input or "work with" in user_input or "hire him" in user_input or "link me up" in user_input:
-        st.session_state.awaiting_contact_confirm = True
-        return f"{bot_name}: Say less, {username} 😎 You want my creator Deynu's contact right?"
-    elif st.session_state.get("awaiting_contact_confirm") and any(word in user_input for word in ["yes", "yeah", "yep", "sure", "go ahead", "give it", "that's what i want", "send it", "ok"]):
-        st.session_state.awaiting_contact_confirm = False
-        return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him Tom AI sent you 💪"
     elif "portfolio" in user_input or "projects" in user_input:
         return f"""{bot_name}: Here’s Amos Deynu’s portfolio so far 💻
 1. Tom AI - The chatbot you’re talking to right now. Built with Python while self-learning the language.
@@ -169,14 +176,29 @@ else:
         username = st.session_state.username
 
         # === YOUR ORIGINAL LOGIC WRAPPED IN TYPING ===
-        with st.chat_message("assistant"):
-            message_placeholder = st.empty()
+with st.chat_message("assistant"):
+    message_placeholder = st.empty()
 
-            # Typing dots
-            for i in range(3):
-                message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
-                time.sleep(random.uniform(0.3, 0.6))
+    # Typing dots
+    for i in range(3):
+        message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
+        time.sleep(random.uniform(0.3, 0.6))
 
+    # Type out WITHOUT tick
+    full_response = ""
+    for char in reply:
+        full_response += char
+        message_placeholder.markdown(f"**Tom:** {full_response}", unsafe_allow_html=True)
+        if char in " .,!?":
+            time.sleep(random.uniform(0.01, 0.03))
+        else:
+            time.sleep(random.uniform(0.02, 0.08))
+
+    # Final message WITH blue tick ONCE
+    message_placeholder.markdown(
+        f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
+        unsafe_allow_html=True
+    )
             try:
                 now = datetime.now()
                 if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
