@@ -64,7 +64,7 @@ def handle_responses(user_input: str) -> str:
     yes_keywords = ["yes","yeah","yep","sure","go ahead","give it","that's what i want","spill it already","send it","ok","want it please","drop it"]
     if any(word in user_input for word in hire_keywords):
         st.session_state.awaiting_contact_confirm = True
-        return f"{bot_name}: Say less, {user_name} 😎 You want my creator Deynu's contact right?"
+        return f"Say less, {user_name} 😎 You want my creator Deynu's contact right?"
     elif st.session_state.get("awaiting_contact_confirm"):
         st.session_state.awaiting_contact_confirm = False
         return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
