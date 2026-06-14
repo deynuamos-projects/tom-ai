@@ -166,7 +166,7 @@ if not st.session_state.setup_done:
         else:
             st.session_state.username = username
             st.session_state.setup_done = True
-            welcome_msg = (f"{bot_name}: Nice to meet you, {username}! what's on your mind?")
+            welcome_msg = (f"{bot_name}: Nice to meet you, {username}! What's on your mind?")
             st.session_state.messages.append({"role": "assistant","content": welcome_msg})
             st.rerun()
             st.stop()
