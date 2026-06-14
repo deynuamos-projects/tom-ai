@@ -64,6 +64,8 @@ def handle_responses(user_input: str) -> str:
 
     elif user_input in ["are you sure", "is it true", "are you real", "are you a real ai", "are you a real person", "are you a real human", "are you a real bot", "are you a real machine", "are you a real computer"]:
         return f"{bot_name}: {random.choice(confirm)}"
+    elif user_input in ["nothing","nothing really"]:
+        return f"{bot_name}: {random.choice(ok_replies)}
 
     elif "what can you do" in user_input or "help" in user_input:
             bot_output = f"""{bot_name}: I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
