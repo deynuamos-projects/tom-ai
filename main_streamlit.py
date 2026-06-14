@@ -8,6 +8,25 @@ import time
 import random
 import requests
 
+import streamlit as st
+
+st.set_page_config(
+    page_title="Tom AI Ghana",
+    page_icon="logo.png",  # robot shows in browser tab
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+
+# Logo + Title - width 120 is perfect for mobile
+col1, col2 = st.columns([1,3])
+with col1:
+    st.image("logo.png", width=120)
+with col2:
+    st.title("Tom AI Ghana")
+    st.caption("🇬🇭 AI Assistant for Ghana")
+
+
+
 # === ONLINE INDICATOR ===
 def check_internet():
     try:
