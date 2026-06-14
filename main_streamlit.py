@@ -5,6 +5,7 @@ import re
 from time import strftime
 import os
 import time
+import random
 import requests
 
 # === ONLINE INDICATOR ===
@@ -170,7 +171,7 @@ else:
         user_input = prompt.lower().strip()
         username = st.session_state.username
 
-        # === LOGIC FIRST, TYPING LAST ===
+        # === YOUR ORIGINAL LOGIC WRAPPED IN TYPING ===
         try:
             now = datetime.now()
             if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
@@ -219,8 +220,8 @@ else:
                         reply = f"**{bot_name}:** {parts[1]} * {parts[2]} = {result}"
                     except:
                         reply = f"**{bot_name}:** Use: mul 3 4"
-                else:
-                    reply = f"**{bot_name}:** Use: mul 3 4"
+                    else:
+                        reply = f"**{bot_name}:** Use: mul 3 4"
 
             elif user_input.startswith("div "):
                 parts = user_input.split()
@@ -230,8 +231,8 @@ else:
                         reply = f"**{bot_name}:** {parts[1]} / {parts[2]} = {result}"
                     except:
                         reply = f"**{bot_name}:** Use: div 20 4"
-                else:
-                    reply = f"**{bot_name}:** Use: div 20 4"
+                    else:
+                        reply = f"**{bot_name}:** Use: div 20 4"
 
             elif re.match(r'^\s*\d+.*[\+\-\*/].*\d+\s*$', user_input):
                 try:
@@ -262,29 +263,19 @@ else:
             reply = random.choice(offline_replies)
             st.session_state.awaiting_contact_confirm = False
 
-        # === TYPING BLOCK GOES HERE AFTER reply IS SET ===
+        # Type out with random speed + WhatsApp ticks
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
-
-            # Typing dots
-            for i in range(3):
-                message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
-                time.sleep(random.uniform(0.3, 0.6))
-
-            # Type out WITHOUT tick
             full_response = ""
             for char in reply:
                 full_response += char
-                message_placeholder.markdown(f"**Tom:** {full_response}", unsafe_allow_html=True)
+                message_placeholder.markdown(
+                    f"{full_response} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
+                    unsafe_allow_html=True
+                )
                 if char in ".,!?":
                     time.sleep(random.uniform(0.01, 0.03))
                 else:
                     time.sleep(random.uniform(0.02, 0.08))
-
-            # Final message WITH blue tick ONCE
-            message_placeholder.markdown(
-                f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
-                unsafe_allow_html=True
-            )
 
         st.session_state.messages.append({"role": "assistant", "content": reply})
