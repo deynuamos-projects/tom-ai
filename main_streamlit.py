@@ -294,7 +294,7 @@ else:
                 else:
                     time.sleep(random.uniform(0.02, 0.08))
          # WHATSAPP TUCK ONLY AT THE END
-                messages_placeholder.markdown(
+                message_placeholder.markdown(
                 f"**{bot_name}:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓✓</span>",
                 unsafe_allow_html=True
                 )
