@@ -75,7 +75,7 @@ Want his contact? Just say 'hire him'"""
 
     if any(word in user_input for word in hire_keywords):
         st.session_state.awaiting_contact_confirm = True
-        return f"Say less, {username} 😎 You want my creator Deynu's contact right?"
+        return f"Say less, {username} 😎 Deynu's Contact:\n📧 Email: **deynuamos@gmail.com**\n📱 WhatsApp/Call: **+233507630485**\nTell him TOM AI sent you 💪"
 
     # RESERT OF REPLIES
     ai_identity = ["I'm an INTELLIGENT AI of course😊!", "Why do you ask", "Just code and vibes"]
