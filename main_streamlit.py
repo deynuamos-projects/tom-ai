@@ -5,7 +5,6 @@ import re
 from time import strftime
 import os
 import time
-import random
 import requests
 
 # === ONLINE INDICATOR ===
@@ -63,21 +62,17 @@ def handle_responses(user_input: str) -> str:
     insult_reply = ["no, I'm just responding to your insults", "I'm just reflecting your words back to you"]
     dont_know = ["I don't have a response for that yet, but I'm learning every day!😎", "ooops, I don't understand 😅", "Huh? 😕 try something else"]
 
-    # === MOVE HIRE/CONTACT + YES CHECK TO TOP ===
     hire_keywords = ["hire", "contact", "book", "work with", "hire him", "link me up", "amos", "deynu", "creator", "builder", "owner","built you", "made you", "created you","who is amos","who is deynu","who is your creator","who is your builder","who is your owner"]
     yes_keywords = ["yes", "yeah", "yep", "sure", "go ahead", "give it", "that's what i want", "send it", "ok"]
 
-    # 1. Hire/Contact intent FIRST
     if any(word in user_input for word in hire_keywords):
         st.session_state.awaiting_contact_confirm = True
         return f"{bot_name}: Say less, {username} 😎 You want my creator Deynu's contact right?"
 
-    # 2. Yes confirmation SECOND
     elif st.session_state.get("awaiting_contact_confirm") and any(word in user_input for word in yes_keywords):
         st.session_state.awaiting_contact_confirm = False
         return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him Tom AI sent you 💪"
 
-    # === YOUR ORIGINAL CODE BELOW - 100% UNCHANGED ===
     if user_input in ["what kind of ai are you", "who are you", "are you intelligent"]:
         return f"{bot_name}: {random.choice(ai_identity)}"
     elif user_input in ["are you sure", "is it true", "are you real", "are you a real ai", "are you a real person", "are you a real human", "are you a real bot", "are you a real machine", "are you a real computer"]:
@@ -175,132 +170,121 @@ else:
         user_input = prompt.lower().strip()
         username = st.session_state.username
 
-        # === YOUR ORIGINAL LOGIC WRAPPED IN TYPING ===
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
+        # === LOGIC FIRST, TYPING LAST ===
+        try:
+            now = datetime.now()
+            if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
+                parts = []
+                if "time" in user_input:
+                    parts.append(f"The time is {now.strftime('%I:%M %p')}")
+                if "date" in user_input:
+                    parts.append(f"Today's date is {now.strftime('%A, %B %d, %Y')}")
+                if "year" in user_input:
+                    parts.append(f"The current year is {now.strftime('%Y')}")
+                if "day" in user_input:
+                    parts.append(f"Today is {now.strftime('%A')}")
+                if "now" in user_input:
+                    parts.append(f"It's {now.strftime('%A, %B %d, %Y at %I:%M %p')}")
+                reply = f"**{bot_name}:** {'; '.join(parts)}"
 
-        # Typing dots
-        for i in range(3):
-            message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
-            time.sleep(random.uniform(0.3, 0.6))
-
-        # Type out WITHOUT tick
-        full_response = ""
-        for char in reply:
-            full_response += char
-            message_placeholder.markdown(f"**Tom:** {full_response}", unsafe_allow_html=True)
-            if char in " .,!?":
-                time.sleep(random.uniform(0.01, 0.03))
-            else:
-                time.sleep(random.uniform(0.02, 0.08))
-
-        # Final message WITH blue tick ONCE
-        message_placeholder.markdown(
-            f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
-            unsafe_allow_html=True
-        )
-    try:
-                now = datetime.now()
-                if "time" in user_input or "date" in user_input or "now" in user_input or "day" in user_input or "year" in user_input:
-                    parts = []
-                    if "time" in user_input:
-                        parts.append(f"The time is {now.strftime('%I:%M %p')}")
-                    if "date" in user_input:
-                        parts.append(f"Today's date is {now.strftime('%A, %B %d, %Y')}")
-                    if "year" in user_input:
-                        parts.append(f"The current year is {now.strftime('%Y')}")
-                    if "day" in user_input:
-                        parts.append(f"Today is {now.strftime('%A')}")
-                    if "now" in user_input:
-                        parts.append(f"It's {now.strftime('%A, %B %d, %Y at %I:%M %p')}")
-                    reply = f"**{bot_name}:** {'; '.join(parts)}"
-
-                elif user_input.startswith("add "):
-                    cleaned = user_input[4:].replace("and", "").replace("plus", "").strip()
-                    parts = cleaned.split()
-                    try:
-                        if len(parts) == 2:
-                            result = float(parts[0]) + float(parts[1])
-                            reply = f"**{bot_name}:** {parts[0]} + {parts[1]} = {result}"
-                        else:
-                            reply = f"**{bot_name}:** Use: add 5 3 or add 5 and 3"
-                    except:
-                        reply = f"**{bot_name}:** Numbers only. Try add 5 and 3"
-
-                elif user_input.startswith("minus "):
-                    cleaned = user_input[6:].replace("and", "").replace("from", "").strip()
-                    parts = cleaned.split()
-                    try:
-                        if len(parts) == 2:
-                            result = float(parts[0]) - float(parts[1])
-                            reply = f"**{bot_name}:** {parts[0]} - {parts[1]} = {result}"
-                        else:
-                            reply = f"**{bot_name}:** Use: minus 10 3 or minus 10 and 3"
-                    except:
-                        reply = f"**{bot_name}:** Numbers only. Try: minus 10 and 3"
-
-                elif user_input.startswith("mul "):
-                    parts = user_input.split()
-                    if len(parts) == 3:
-                        try:
-                            result = float(parts[1]) * float(parts[2])
-                            reply = f"**{bot_name}:** {parts[1]} * {parts[2]} = {result}"
-                        except:
-                            reply = f"**{bot_name}:** Use: mul 3 4"
+            elif user_input.startswith("add "):
+                cleaned = user_input[4:].replace("and", "").replace("plus", "").strip()
+                parts = cleaned.split()
+                try:
+                    if len(parts) == 2:
+                        result = float(parts[0]) + float(parts[1])
+                        reply = f"**{bot_name}:** {parts[0]} + {parts[1]} = {result}"
                     else:
+                        reply = f"**{bot_name}:** Use: add 5 3 or add 5 and 3"
+                except:
+                    reply = f"**{bot_name}:** Numbers only. Try add 5 and 3"
+
+            elif user_input.startswith("minus "):
+                cleaned = user_input[6:].replace("and", "").replace("from", "").strip()
+                parts = cleaned.split()
+                try:
+                    if len(parts) == 2:
+                        result = float(parts[0]) - float(parts[1])
+                        reply = f"**{bot_name}:** {parts[0]} - {parts[1]} = {result}"
+                    else:
+                        reply = f"**{bot_name}:** Use: minus 10 3 or minus 10 and 3"
+                except:
+                    reply = f"**{bot_name}:** Numbers only. Try: minus 10 and 3"
+
+            elif user_input.startswith("mul "):
+                parts = user_input.split()
+                if len(parts) == 3:
+                    try:
+                        result = float(parts[1]) * float(parts[2])
+                        reply = f"**{bot_name}:** {parts[1]} * {parts[2]} = {result}"
+                    except:
                         reply = f"**{bot_name}:** Use: mul 3 4"
-
-                elif user_input.startswith("div "):
-                    parts = user_input.split()
-                    if len(parts) == 3:
-                        try:
-                            result = float(parts[1]) / float(parts[2])
-                            reply = f"**{bot_name}:** {parts[1]} / {parts[2]} = {result}"
-                        except:
-                            reply = f"**{bot_name}:** Use: div 20 4"
-                    else:
-                        reply = f"**{bot_name}:** Use: div 20 4"
-
-                elif re.match(r'^\s*\d+.*[\+\-\*/].*\d+\s*$', user_input):
-                    try:
-                        expr = user_input.replace('\\', '/')
-                        result = eval(expr, {})
-                        reply = f"**{bot_name}:** The result of {expr} = {result}"
-                    except:
-                        reply = f"**{bot_name}:** That doesn't look like a valid math expression. Try again."
-
-                elif user_input in ("exit", "quit", "bye","goodbye", "see you again", "see you later", "talk later", "later", "i have to go", "i gotta go","i need to go", "i must go", "i'm leaving", "i am leaving", "i'm out", "i am out","catch you later", "talk to you later", "good night", "night","good bye"):
-                    reply = f"**{bot_name}:** Goodbye, {username}!"
-                    st.session_state.messages.append({"role": "assistant", "content": reply})
-                    with st.chat_message("assistant"):
-                        st.markdown(reply)
-                    st.stop()
-
                 else:
-                    reply = handle_responses(user_input)
+                    reply = f"**{bot_name}:** Use: mul 3 4"
 
-                st.session_state.awaiting_contact_confirm = False
+            elif user_input.startswith("div "):
+                parts = user_input.split()
+                if len(parts) == 3:
+                    try:
+                        result = float(parts[1]) / float(parts[2])
+                        reply = f"**{bot_name}:** {parts[1]} / {parts[2]} = {result}"
+                    except:
+                        reply = f"**{bot_name}:** Use: div 20 4"
+                else:
+                    reply = f"**{bot_name}:** Use: div 20 4"
 
-            except Exception as e:
-                offline_replies = [
-                    f"**{bot_name}:** Yo {username}, my brain's offline rn but I got you 💪 What's up?",
-                    f"**{bot_name}:** Network acting up, but I'm still here {username}. Try me again?",
-                    f"**{bot_name}:** Offline mode activated 🤖 But I remember you're {username}. What you need?"
-                ]
-                reply = random.choice(offline_replies)
-                st.session_state.awaiting_contact_confirm = False
+            elif re.match(r'^\s*\d+.*[\+\-\*/].*\d+\s*$', user_input):
+                try:
+                    expr = user_input.replace('\\', '/')
+                    result = eval(expr, {})
+                    reply = f"**{bot_name}:** The result of {expr} = {result}"
+                except:
+                    reply = f"**{bot_name}:** That doesn't look like a valid math expression. Try again."
 
-            # Type out with random speed + WhatsApp ticks
+            elif user_input in ("exit", "quit", "bye","goodbye", "see you again", "see you later", "talk later", "later", "i have to go", "i gotta go","i need to go", "i must go", "i'm leaving", "i am leaving", "i'm out", "i am out","catch you later", "talk to you later", "good night", "night","good bye"):
+                reply = f"**{bot_name}:** Goodbye, {username}!"
+                st.session_state.messages.append({"role": "assistant", "content": reply})
+                with st.chat_message("assistant"):
+                    st.markdown(reply)
+                st.stop()
+
+            else:
+                reply = handle_responses(user_input)
+
+            st.session_state.awaiting_contact_confirm = False
+
+        except Exception as e:
+            offline_replies = [
+                f"**{bot_name}:** Yo {username}, my brain's offline rn but I got you 💪 What's up?",
+                f"**{bot_name}:** Network acting up, but I'm still here {username}. Try me again?",
+                f"**{bot_name}:** Offline mode activated 🤖 But I remember you're {username}. What you need?"
+            ]
+            reply = random.choice(offline_replies)
+            st.session_state.awaiting_contact_confirm = False
+
+        # === TYPING BLOCK GOES HERE AFTER reply IS SET ===
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+
+            # Typing dots
+            for i in range(3):
+                message_placeholder.markdown(f"**Tom is typing{'.' * (i+1)}**")
+                time.sleep(random.uniform(0.3, 0.6))
+
+            # Type out WITHOUT tick
             full_response = ""
             for char in reply:
                 full_response += char
-                message_placeholder.markdown(
-                    f"{full_response} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
-                    unsafe_allow_html=True
-                )
+                message_placeholder.markdown(f"**Tom:** {full_response}", unsafe_allow_html=True)
                 if char in ".,!?":
                     time.sleep(random.uniform(0.01, 0.03))
                 else:
                     time.sleep(random.uniform(0.02, 0.08))
+
+            # Final message WITH blue tick ONCE
+            message_placeholder.markdown(
+                f"**Tom:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
+                unsafe_allow_html=True
+            )
 
         st.session_state.messages.append({"role": "assistant", "content": reply})
