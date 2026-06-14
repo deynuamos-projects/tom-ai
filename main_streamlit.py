@@ -53,22 +53,31 @@ def handle_responses(user_input: str) -> str:
     username = st.session_state.username
     user_input = user_input.lower().strip()
 
-    # 1. INFORMATION AOUT AMOS FIRST
-    if any(w in user_input for w in ["who created you","who built you","who made you","who is your creator","tell me about Amos","who is Deynu","who is Amos","who is Amos Deynu"]):
-           return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
-           I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
-           He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = ***Amos Deynu!***
-           Want his contact? Just say 'hire him'"""
-    # 2. CONTACT FLOW SECOND
+    # 1. INFORMATION ABOUT AMOS FIRST - moved to TOP
+    if any(w in user_input for w in ["who created you","who built you","who made you","who is your creator","tell me about amos","who is deynu","who is amos","who is amos deynu"]):
+        return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
+I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
+He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = ***Amos Deynu!***
+Want his contact? Just say 'hire him'"""
+
+    # 2. CONTACT FLOW - removed "amos" "deynu" from hire_keywords
     hire_keywords = ["hire","contact","book","work with","hire him","link me up","creator","builder","owner"]
     yes_keywords = ["yes","yeah","yep","sure","go ahead","give it","that's what i want","spill it already","send it","ok","want it please","drop it"]
+
+    # 3. Check awaiting_contact_confirm BEFORE hire_keywords
+    if st.session_state.get("awaiting_contact_confirm"):
+        if any(word in user_input for word in yes_keywords):
+            st.session_state.awaiting_contact_confirm = False
+            return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
+        else:
+            st.session_state.awaiting_contact_confirm = False
+            return f"{bot_name}: No problem {username} 😊 Ask me anything else!"
+
     if any(word in user_input for word in hire_keywords):
         st.session_state.awaiting_contact_confirm = True
-        return f"Say less, {user_name} 😎 You want my creator Deynu's contact right?"
-    elif st.session_state.get("awaiting_contact_confirm"):
-        st.session_state.awaiting_contact_confirm = False
-        return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him TOM AI sent you 💪"
-    # RESERT OF REPLIES    
+        return f"Say less, {username} 😎 You want my creator Deynu's contact right?"
+
+    # RESERT OF REPLIES
     ai_identity = ["I'm an INTELLIGENT AI of course😊!", "Why do you ask", "Just code and vibes"]
     confirm = ["sure", "👌", "👍", "Yes"]
     thanks = ["Thank you", "Thanks", "I'm blushing😁","👍","🔥"]
@@ -78,17 +87,6 @@ def handle_responses(user_input: str) -> str:
     insults_hard = ["Gbemi😂!", "you dey craze", "you be Mumu", "onyesorrmi😒", "don't try me", "johnky user","kwaasia!","gbevou!","aboa!","wo hu s3 adwene😅","eta mele ashiwou","susu mele ashiwou","wo te mu sum s3 kubea"]
     insult_reply = ["no, I'm just responding to your insults", "I'm just reflecting your words back to you"]
     dont_know = ["I don't have a response for that yet, but I'm learning every day!😎", "ooops, I don't understand 😅", "Huh? 😕 try something else"]
-
-    hire_keywords = ["hire", "contact", "book", "work with", "hire him", "link me up", "amos", "deynu", "creator", "builder", "owner","built you", "made you", "created you","who is amos","who is deynu","who is your creator","who is your builder","who is your owner"]
-    yes_keywords = ["yes", "yeah", "yep", "sure", "go ahead", "give it", "that's what i want", "send it", "ok"]
-
-    if any(word in user_input for word in hire_keywords):
-        st.session_state.awaiting_contact_confirm = True
-        return f"{bot_name}: Say less, {username} 😎 You want my creator Deynu's contact right?"
-
-    elif st.session_state.get("awaiting_contact_confirm") and any(word in user_input for word in yes_keywords):
-        st.session_state.awaiting_contact_confirm = False
-        return f"{bot_name}: **Deynu's Contact:**\n📧 Email: deynuamos@gmail.com\n📱 WhatsApp/Call: +233507630485\nTell him Tom AI sent you 💪"
 
     if user_input in ["what kind of ai are you", "who are you", "are you intelligent"]:
         return f"{bot_name}: {random.choice(ai_identity)}"
@@ -294,9 +292,9 @@ else:
                 else:
                     time.sleep(random.uniform(0.02, 0.08))
          # WHATSAPP TUCK ONLY AT THE END
-                message_placeholder.markdown(
-                f"**{bot_name}:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓✓</span>",
-                unsafe_allow_html=True
-                )
-                
+            message_placeholder.markdown(
+            f"**{bot_name}:** {reply} <span style='color: #53bdeb; font-size:16px;'>✓</span>",
+            unsafe_allow_html=True
+            )
+
         st.session_state.messages.append({"role": "assistant", "content": reply})
