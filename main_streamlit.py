@@ -54,7 +54,7 @@ def handle_responses(user_input: str) -> str:
     user_input = user_input.lower().strip()
 
     # 1. INFORMATION AOUT AMOS FIRST
-    if any(w in user_input for w in ["who created you","who built you","who made you","who is your creator","tell me about Amos","who is Deynu","who is Amos","who is Amos Deynu"])
+    if any(w in user_input for w in ["who created you","who built you","who made you","who is your creator","tell me about Amos","who is Deynu","who is Amos","who is Amos Deynu"]):
            return f"""{bot_name}: I was built by Amos Deynu, who is a brilliant developer and born ideator from Accra, Ghana 🇬🇭.
            I am his first product for his portfolio. He built me while learning Python by himself, which shows his discipline and self-taught skills 💪. Amos specializes in Python, AI chatbots, and turning ideas into smart tools that solve real problems.
            He's available for partnership, freelance projects, and building anything from scratch. Clean code + big ideas = ***Amos Deynu!***
