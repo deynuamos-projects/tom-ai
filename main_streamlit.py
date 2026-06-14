@@ -298,3 +298,13 @@ else:
             )
 
         st.session_state.messages.append({"role": "assistant", "content": reply})
+
+# Hide Streamlit branding
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}  /* hides the ⋮ menu */
+    footer {visibility: hidden;}     /* hides "Made with Streamlit" */
+    header {visibility: hidden;}     /* hides the top bar */
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
