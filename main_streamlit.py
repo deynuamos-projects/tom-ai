@@ -70,7 +70,7 @@ def handle_responses(user_input: str) -> str:
             bot_output = f"""{bot_name}: I can chat, tell time, do math, show Amos's portfolio, or connect you to him for work 💪
 
             Try: hi, time, add 5 3, portfolio, hire Amos"""
-        return bot_output
+            return bot_output
 
     elif user_input in ["the feeling is mutual","same here","you too","mutual feelings", "i like you", "i love you", "i care about you", "i appreciate you"]:
         return f"{bot_name}: aww thanks {username}!"
