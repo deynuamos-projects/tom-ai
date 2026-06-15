@@ -9,18 +9,34 @@ import random
 import requests
 
 import streamlit as st
+import base64
+
+# Convert LOGO.png to base64 and inject favicon
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+img_base64 = get_base64_of_bin_file("logo.png")
 
 st.set_page_config(
     page_title="Tom AI Ghana",
-    page_icon="favicon.ico",  # robot shows in browser tab
+    page_icon="logo.png",  # changed from favicon.ico
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
+# Force robot logo for PWA install icon
+st.markdown(f"""
+<link rel="icon" href="data:image/png;base64,{img_base64}" type="image/png">
+<link rel="apple-touch-icon" href="data:image/png;base64,{img_base64}" type="image/png">
+<meta name="theme-color" content="#0F172A">
+""", unsafe_allow_html=True)
+
 # Logo + Title - width 120 is perfect for mobile
 col1, col2 = st.columns([1,3])
 with col1:
-    st.image("favicon.ico", width=120)
+    st.image("logo.png", width=120)
 with col2:
     st.caption("🇬🇭 AI Assistant from scratch")
 
