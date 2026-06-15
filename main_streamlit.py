@@ -12,7 +12,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Tom AI Ghana",
-    page_icon="logo.png",  # robot shows in browser tab
+    page_icon="favicon.ico",  # robot shows in browser tab
     layout="centered",
     initial_sidebar_state="collapsed"
 )
