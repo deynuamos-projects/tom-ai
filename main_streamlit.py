@@ -20,7 +20,7 @@ st.set_page_config(
 # Logo + Title - width 120 is perfect for mobile
 col1, col2 = st.columns([1,3])
 with col1:
-    st.image("logo.png", width=120)
+    st.image("favicon.ico", width=120)
 with col2:
     st.caption("🇬🇭 AI Assistant from scratch")
 
