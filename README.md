@@ -1,1 +1,1 @@
-# tom-ai
+Tom AI is my AI-powered portfolio assistant built to provide an interactive way for visitors to learn about me. It showcases my technical skills, completed and ongoing projects, experience, achievements, and professional journey. Visitors can also access my contact information, explore what I'm currently building, and ask questions about my work through a conversational interface.# tom-ai
