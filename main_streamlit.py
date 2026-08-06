@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import streamlit as st
 import random
 from datetime import date, datetime
@@ -171,15 +170,6 @@ else:
         st.session_state.messages.append({"role": "assistant", "content": reply})
         with st.chat_message("assistant"):
             st.markdown(reply)
-=======
-import streamlit as st
-import random
-from datetime import date, datetime
-import re
-from time import strftime
-import os
-import time
-import importlib
 try:
     r = importlib.import_module("responses")
     bot_name = getattr(r, "BOT_NAME", "Tom AI")
@@ -414,4 +404,3 @@ else:
         st.session_state.messages.append({"role": "assistant", "content": reply})
         with st.chat_message("assistant"):
             st.markdown(reply)
->>>>>>> ccebbe48c720d1e9e07f6fd035314c2c032bf87a
