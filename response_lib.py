@@ -98,7 +98,7 @@ def get_response(user_input: str, username: str) -> str:
                 # Normal list of possible responses – pick one at random
                 return f"{bot_name}: {random.choice(response)}"
             # Once a matching rule has been handled we stop processing
-            return
+                return
 
     # -----------------------------------------------------------------
     # Fallback – original `dont_know` behaviour
@@ -148,13 +148,71 @@ def get_extra_response(user_input: str, username: str) -> str:
                 f"📧 Email: [deynuamos@gmail.com](mailto:deynuamos@gmail.com)\n"
                 f"📱 WhatsApp/Call: [+233507630485](tel:+233507630485)")
 
-    if "portfolio" in user_input_lower or "projects" in user_input_lower or "built" in user_input_lower \
-            or "show" in user_input_lower:
-        return (f"{bot_name}: Here’s Amos Deynu’s portfolio so far 💻\n"
-                f"1. Tom AI - The chatbot you’re talking to right now. Built with Python while self‑learning "
-                f"the language.\n"
-                f"2. More projects loading... Amos is a born ideator with more builds coming 🚀\n"
-                f"Want to be his next project? Type 'hire Amos' and let’s talk.")
+    if any(keyword in user_input_lower for keyword in [
+    "portfolio",
+    "projects",
+    "current projects",
+    "my projects",
+    "show projects",
+    "show portfolio",
+    "what have you built",
+    "current project"
+]):
+
+     return f"""{bot_name}: 🚀 Amos Deynu's Portfolio
+
+1️⃣ TOM AI
+🤖 AI Portfolio Assistant
+Status: ✅ Completed
+
+Description:
+A conversational AI assistant built with Python to showcase Amos Deynu's portfolio, skills, and projects.
+
+━━━━━━━━━━━━━━━━━━━━
+
+2️⃣ DEKA AI
+🇬🇭 Ghana Knowledge AI
+Status: 🟡 In Development
+
+Description:
+An AI platform focused on Ghana's culture, history, regions, education, tourism, and local knowledge using FastAPI and Semantic Search.
+
+━━━━━━━━━━━━━━━━━━━━
+
+3️⃣ FootballGame Master
+⚽ Football Simulation Game
+Status: 🟡 In Development
+
+Description:
+A football management and simulation game featuring match engine, career mode, AI opponents, and multiplayer.
+
+━━━━━━━━━━━━━━━━━━━━
+
+4️⃣ Python Calculator
+🧮 Status: ✅ Completed
+
+━━━━━━━━━━━━━━━━━━━━
+
+5️⃣ Python Guess Game
+🎮 Status: ✅ Completed
+
+━━━━━━━━━━━━━━━━━━━━
+
+6️⃣ THE IDEATOR'S HUB
+🌍 AI • Web3 • Innovation Community
+
+Mission:
+Helping people turn their ideas into reality through AI, Python, Web3, and innovative solutions.
+
+Type:
+• deka
+• football
+• skills
+• contact
+• hire amos
+
+to learn more.
+"""
 
     # Thank‑you handling (fallback to generic thank‑you if not caught earlier)
     if user_input_lower == "thank you":
