@@ -175,16 +175,19 @@ else:
         else:
             reply = handle_responses(user_input)
 
-            st.session_state.messages.append({"role": "assistant", "content": reply})
-
             with st.chat_message("assistant"):
                 placeholder = st.empty()
 
-            full_response = ""
+                full_response = ""
 
-            for char in reply:
-                full_response += char
-            placeholder.markdown(full_response + "▌")
-            time.sleep(0.015)
+                for char in reply:
+                    full_response += char
+                    placeholder.markdown(full_response + "▌")
+                    time.sleep(0.03)
 
-            placeholder.markdown(full_response)
+                placeholder.markdown(full_response)
+
+            # Save after animation finishes
+            st.session_state.messages.append(
+                {"role": "assistant", "content": reply}
+)
