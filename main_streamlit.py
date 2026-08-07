@@ -177,14 +177,14 @@ else:
 
             st.session_state.messages.append({"role": "assistant", "content": reply})
 
-with st.chat_message("assistant"):
-    placeholder = st.empty()
+            with st.chat_message("assistant"):
+                placeholder = st.empty()
 
-    full_response = ""
+            full_response = ""
 
-    for char in reply:
-        full_response += char
-        placeholder.markdown(full_response + "▌")
-        time.sleep(0.015)
+            for char in reply:
+                full_response += char
+            placeholder.markdown(full_response + "▌")
+            time.sleep(0.015)
 
-    placeholder.markdown(full_response)
+            placeholder.markdown(full_response)
