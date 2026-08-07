@@ -122,20 +122,6 @@ def get_extra_response(user_input: str, username: str) -> str:
     """
     user_input_lower = user_input.lower().strip()
 
-    # Creator‑related keywords – share Amos Deynu’s story
-    creator_keywords = [
-        "amos", "deynu", "creator", "builder", "owner",
-        "built you", "made you", "created you",
-        "who is amos", "who is deynu", "who is your creator",
-        "who is your builder", "who is your owner"
-    ]
-    if any(word in user_input_lower for word in creator_keywords):
-        return (f"{bot_name}: I was built by Amos Deynu, a brilliant developer and born ideator "
-                f"from Accra, Ghana 🇬🇭. I am his first product for his portfolio. He built me while "
-                f"learning Python by himself, which shows his discipline and self‑taught skills 💪. "
-                f"Amos specializes in Python, AI chatbots, and turning ideas into smart tools that "
-                f"solve real problems. He's available for partnership, freelance projects, and "
-                f"building anything from scratch. Clean code + big ideas = Amos Deynu!😁")
 
     # Hire / contact / portfolio branches
     if "hire" in user_input_lower or "contact" in user_input_lower or "book" in user_input_lower \
@@ -213,6 +199,34 @@ Type:
 
 to learn more.
 """
+    
+    # Creator‑related keywords – share Amos Deynu’s story
+    # Creator-related keywords – share Amos Deynu's story
+
+    creator_keywords = [
+    "who is amos",
+    "who is amos deynu",
+    "tell me about amos",
+    "tell me about amos deynu",
+    "who created you",
+    "who built you",
+    "who made you",
+    "your creator",
+    "your builder",
+    "your owner",
+    "who is your creator",
+    "who is your builder",
+    "who is your owner"
+]
+    if any(word in user_input_lower for word in creator_keywords):
+        return (f"{bot_name}: I was built by Amos Deynu, a brilliant developer and born ideator "
+                f"from Accra, Ghana 🇬🇭. I am his first product for his portfolio. He built me while "
+                f"learning Python by himself, which shows his discipline and self‑taught skills 💪. "
+                f"Amos specializes in Python, AI chatbots, and turning ideas into smart tools that "
+                f"solve real problems. He's available for partnership, freelance projects, and "
+                f"building anything from scratch. Clean code + big ideas = Amos Deynu!😁")
+
+
 
     # Thank‑you handling (fallback to generic thank‑you if not caught earlier)
     if user_input_lower == "thank you":

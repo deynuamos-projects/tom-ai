@@ -36,8 +36,15 @@ def clean_name(raw_text):
     return text.title() if text else "Guest"
 
 def type_print(text, delay=0.02):
-    # Streamlit can't type char by char easily, so we show full text
-    st.write(text)
+    placeholder = st.empty()
+    full_text = ""
+
+    for char in text:
+        full_text += char
+        placeholder.markdown(full_text + "▌")
+        time.sleep(delay)
+
+    placeholder.markdown(full_text)
 
 def handle_responses(user_input: str) -> str:
     username = st.session_state.username
@@ -168,5 +175,15 @@ else:
             reply = handle_responses(user_input)
         
         st.session_state.messages.append({"role": "assistant", "content": reply})
-        with st.chat_message("assistant"):
-            st.markdown(reply)
+
+with st.chat_message("assistant"):
+    placeholder = st.empty()
+
+    full_response = ""
+
+    for char in reply:
+        full_response += char
+        placeholder.markdown(full_response + "▌")
+        time.sleep(0.015)
+
+    placeholder.markdown(full_response)
