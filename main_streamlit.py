@@ -175,11 +175,10 @@ else:
         else:
             reply = handle_responses(user_input)
 
-st.session_state.messages.append({"role": "assistant", "content": reply})
+            st.session_state.messages.append({"role": "assistant", "content": reply})
 
 with st.chat_message("assistant"):
     placeholder = st.empty()
-
     full_response = ""
 
     for char in reply:
@@ -188,3 +187,5 @@ with st.chat_message("assistant"):
         time.sleep(0.015)
 
     placeholder.markdown(full_response)
+
+st.stop()
