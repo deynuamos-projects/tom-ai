@@ -65,6 +65,7 @@ if not st.session_state.setup_done:
     st.write(f"Hello! I'm {bot_name}, your friendly AI assistant. What's your name?")
     
     if prompt := st.chat_input("You: "):
+        reply = ""
         raw_input = prompt.strip()
         username = clean_name(raw_input)
         
@@ -173,8 +174,8 @@ else:
         
         else:
             reply = handle_responses(user_input)
-        
-        st.session_state.messages.append({"role": "assistant", "content": reply})
+
+st.session_state.messages.append({"role": "assistant", "content": reply})
 
 with st.chat_message("assistant"):
     placeholder = st.empty()
