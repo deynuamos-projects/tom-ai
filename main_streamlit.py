@@ -179,6 +179,7 @@ else:
 
 with st.chat_message("assistant"):
     placeholder = st.empty()
+
     full_response = ""
 
     for char in reply:
@@ -187,5 +188,3 @@ with st.chat_message("assistant"):
         time.sleep(0.015)
 
     placeholder.markdown(full_response)
-
-st.stop()
